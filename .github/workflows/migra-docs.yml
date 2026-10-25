@@ -1,0 +1,21 @@
+name: Mover documentos para o privado
+on:
+  workflow_dispatch: {}
+permissions:
+  contents: write
+concurrency: backup
+jobs:
+  migra:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - name: Mover
+        env:
+          SUPABASE_SERVICE_KEY: ${{ secrets.SUPABASE_SERVICE_KEY }}
+        run: python3 auditoria/migra_docs.py
+      - name: Guardar resultado
+        if: always()
+        run: |
+          git config user.name "Backup Frota"; git config user.email "backup@users.noreply.github.com"
+          git add auditoria/migracao.json 2>/dev/null; git commit -m "Resultado da migracao de documentos" || true; git pull --rebase -q; git push

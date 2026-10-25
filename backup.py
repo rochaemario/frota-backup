@@ -10,6 +10,7 @@ import json, os, sys, urllib.request, urllib.parse
 URL = os.environ.get('SUPABASE_URL', 'https://uzpoaifuxwojiomxqukf.supabase.co').rstrip('/')
 KEY = os.environ['SUPABASE_SERVICE_KEY']
 BUCKET = os.environ.get('SUPABASE_BUCKET', 'arquivos')
+BUCKET_DOC = 'documentos'  # documentos privados (veiculo, nota fiscal)
 H = {'apikey': KEY, 'Authorization': 'Bearer ' + KEY}
 
 def req(path, data=None, method=None, raw=False):
@@ -27,13 +28,14 @@ def tabela(nome, ordem):
         if len(lote) < 1000: return out
         off += 1000
 
-def arquivos(prefix=''):
+def arquivos(prefix='', bucket=None):
+    bucket = bucket or BUCKET
     out, off = [], 0
     while True:
-        lote = req(f'/storage/v1/object/list/{BUCKET}', {'prefix': prefix, 'limit': 1000, 'offset': off, 'sortBy': {'column': 'name', 'order': 'asc'}})
+        lote = req(f'/storage/v1/object/list/{bucket}', {'prefix': prefix, 'limit': 1000, 'offset': off, 'sortBy': {'column': 'name', 'order': 'asc'}})
         for o in lote:
             nome = (prefix + '/' if prefix else '') + o['name']
-            if o.get('id') is None: out += arquivos(nome)      # pasta
+            if o.get('id') is None: out += arquivos(nome, bucket)      # pasta
             else: out.append(nome)
         if len(lote) < 1000: return out
         off += 1000
@@ -56,7 +58,16 @@ def main():
         os.makedirs(os.path.dirname(dst) or 'fotos', exist_ok=True)
         b = req(f'/storage/v1/object/{BUCKET}/' + urllib.parse.quote(n), raw=True)
         open(dst, 'wb').write(b); novos += 1
-    resumo = {'registros': len(docs), 'arquivos': len(nomes), 'arquivos_novos': novos}
+    ndoc = 0
+    try:
+        for n in arquivos('', BUCKET_DOC):
+            dst = os.path.join('documentos', n); ndoc += 1
+            if os.path.exists(dst): continue
+            os.makedirs(os.path.dirname(dst) or 'documentos', exist_ok=True)
+            open(dst, 'wb').write(req(f'/storage/v1/object/{BUCKET_DOC}/' + urllib.parse.quote(n), raw=True))
+    except Exception as e:
+        print('documentos: nao copiado:', e)
+    resumo = {'registros': len(docs), 'arquivos': len(nomes), 'arquivos_novos': novos, 'documentos': ndoc}
     json.dump(resumo, open('dados/resumo.json', 'w'), indent=1)
     print(resumo)
     if not docs: sys.exit('nenhum registro lido: backup suspeito, abortando')
