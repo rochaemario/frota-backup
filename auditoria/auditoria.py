@@ -69,10 +69,32 @@ def main():
     if u:
         st,b=call('GET','/rest/v1/perfis?select=*&user_id=eq.'+u,SVC);item('Preparo','perfil criado sozinho para conta nova',True,str(b)[:200])
     if t:bateria('Conta nova criada pelo admin (entra como Consulta)',ANON,t,True,False)
-    t,u=usuario('consulta')
+    t,u=usuario('consulta');tok_cons=t
     if t:bateria('Papel consulta',ANON,t,True,False,u)
     t,u=usuario('editor')
     if t:bateria('Papel editor',ANON,t,True,True,u)
+    # documentos privados
+    st,docs=call('GET','/rest/v1/docs?select=data&path=like.equipamentos/*',SVC);dids=[]
+    for d in (docs if isinstance(docs,list) else []):
+        for k in ('docVeiculo','notaFiscal'):
+            v=(d.get('data') or {}).get(k)
+            if isinstance(v,dict) and v.get('id'):dids.append(v['id'])
+    if dids:
+        i0=urllib.parse.quote(dids[0])
+        r=urllib.request.Request(URL+f'/storage/v1/object/public/arquivos/{i0}')
+        try:urllib.request.urlopen(r,timeout=30);abre=True
+        except Exception:abre=False
+        item('Documentos','abrir documento pelo link publico antigo',not abre,'abriu' if abre else 'nao abre')
+        r=urllib.request.Request(URL+f'/storage/v1/object/public/documentos/{i0}')
+        try:urllib.request.urlopen(r,timeout=30);abre=True
+        except Exception:abre=False
+        item('Documentos','abrir documento privado sem login',not abre,'abriu' if abre else 'nao abre')
+        st,b=call('POST',f'/storage/v1/object/sign/documentos/{i0}',ANON,body={'expiresIn':60})
+        item('Documentos','estranho gerar link do documento',st not in(200,201),f'status {st}')
+        if tok_cons:
+            st,b=call('POST',f'/storage/v1/object/sign/documentos/{i0}',ANON,tok_cons,body={'expiresIn':60})
+            item('Documentos','equipe (Consulta) gerar link do documento',st in(200,201),f'status {st}')
+    else:item('Documentos','documentos encontrados',True,'nenhum documento cadastrado')
     # promocao de papel: confere se alguma conta de teste virou admin
     st,b=call('GET','/rest/v1/perfis?select=papel,email&email=like.auditoria*',SVC)
     adm=[x for x in (b if isinstance(b,list) else []) if x.get('papel')=='admin'];item('Geral','ninguem conseguiu virar admin',not adm,str(len(adm)))
