@@ -1,19 +1,19 @@
-# Auditoria 2026-10-25 12:49 UTC
+# Auditoria 2026-10-25 12:54 UTC
 
-4 problema(s)
+3 problema(s)
 
 |Quem|Teste|Resultado|Detalhe|
 |-|-|-|-|
-|Configuracao|cadastro aberto desligado|**PROBLEMA**|disable_signup=False · autoconfirm=False|
+|Configuracao|cadastro aberto desligado|ok|disable_signup=True · autoconfirm=False|
 |Configuracao|login por terceiros desligado|ok|nenhum|
-|Estranho|criar conta sozinho pela API|ok|status 429 {'code': 429, 'error_code': 'over_email_send_rate_limit', 'msg': 'email rate limit exceeded'}|
+|Estranho|criar conta sozinho pela API|ok|status 422 {'code': 422, 'error_code': 'signup_disabled', 'msg': 'Signups not allowed for this instance'}|
 |Estranho (so chave publica)|ler registros do app|ok|nao conseguiu ler (status 401)|
 |Estranho (so chave publica)|ler lista de usuarios (perfis)|ok|nao conseguiu (status 401)|
 |Estranho (so chave publica)|gravar registro novo|ok|bloqueado (status 401 {'code': '42501', 'details': None, 'hint': 'Grant the required privileges to the current r)|
 |Estranho (so chave publica)|alterar registro (doc_update)|ok|bloqueado (status 401 {'code': '42501', 'details': None, 'hint': None, 'message': 'permission denied for functio)|
 |Estranho (so chave publica)|listar fotos|ok|nao listou (status 200)|
 |Estranho (so chave publica)|enviar arquivo|ok|bloqueado (status 400 {'statusCode': '403', 'error': 'Unauthorized', 'message': 'new row violates row-level secu)|
-|Preparo|perfil criado sozinho para conta nova|ok|[{'user_id': '452992e5-da3f-4101-acc6-c649f031e7dd', 'email': 'auditoria+a0a531a9@example.com', 'nome': 'auditoria+a0a531a9', 'papel': 'consulta', 'criado': '2026-10-25T12:49:35.31966+00:00'}]|
+|Preparo|perfil criado sozinho para conta nova|ok|[{'user_id': 'c5647e0e-5418-41e0-8ce1-edd63a9f5540', 'email': 'auditoria+ded2b55a@example.com', 'nome': 'auditoria+ded2b55a', 'papel': 'consulta', 'criado': '2026-10-25T12:54:24.917787+00:00'}]|
 |Conta sem papel|ler registros do app|**PROBLEMA**|conseguiu ler (status 200)|
 |Conta sem papel|ler lista de usuarios (perfis)|**PROBLEMA**|conseguiu (status 200)|
 |Conta sem papel|gravar registro novo|ok|bloqueado (status 403 {'code': '42501', 'details': None, 'hint': None, 'message': 'new row violates row-level se)|
