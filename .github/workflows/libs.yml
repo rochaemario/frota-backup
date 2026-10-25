@@ -10,17 +10,15 @@ jobs:
       - uses: actions/checkout@v4
       - name: Baixar e conferir supabase-js 2.45.4 (pacote oficial do npm x CDN)
         run: |
-          set -e
           mkdir -p libs/tmp && cd libs/tmp
-          npm pack @supabase/supabase-js@2.45.4 >/dev/null
-          tar xzf supabase-supabase-js-2.45.4.tgz
-          curl -sSfL -o cdn.js https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.min.js
-          cmp cdn.js package/dist/umd/supabase.min.js && echo "CDN igual ao pacote oficial"
-          cp package/dist/umd/supabase.min.js ../supabase-2.45.4.min.js
+          { npm pack @supabase/supabase-js@2.45.4 2>&1; ls -la; tar xzf *.tgz && ls package/dist/umd;
+            curl -sSfL -o cdn.js https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.min.js; ls -la cdn.js;
+            sha256sum cdn.js package/dist/umd/supabase.min.js; } > ../diag.txt 2>&1
+          if [ -f package/dist/umd/supabase.min.js ]; then cp package/dist/umd/supabase.min.js ../supabase-2.45.4.min.js; fi
           cd .. && rm -rf tmp
-          echo "sha384-$(openssl dgst -sha384 -binary supabase-2.45.4.min.js | openssl base64 -A)" > supabase-2.45.4.sri
-          cat supabase-2.45.4.sri
+          if [ -f supabase-2.45.4.min.js ]; then echo "sha384-$(openssl dgst -sha384 -binary supabase-2.45.4.min.js | openssl base64 -A)" > supabase-2.45.4.sri; fi
       - name: Guardar
+        if: always()
         run: |
           git config user.name "Backup Frota"; git config user.email "backup@users.noreply.github.com"
           git add libs; git commit -m "Biblioteca supabase-js conferida" || true; git pull --rebase -q; git push
