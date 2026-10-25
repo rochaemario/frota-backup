@@ -1,0 +1,100 @@
+npm notice
+npm notice 📦  @supabase/supabase-js@2.45.4
+npm notice Tarball Contents
+npm notice 1.1kB LICENSE
+npm notice 2.9kB README.md
+npm notice 1.2kB dist/main/index.d.ts
+npm notice 698B dist/main/index.d.ts.map
+npm notice 2.5kB dist/main/index.js
+npm notice 505B dist/main/index.js.map
+npm notice 538B dist/main/lib/constants.d.ts
+npm notice 390B dist/main/lib/constants.d.ts.map
+npm notice 1.0kB dist/main/lib/constants.js
+npm notice 777B dist/main/lib/constants.js.map
+npm notice 342B dist/main/lib/fetch.d.ts
+npm notice 326B dist/main/lib/fetch.d.ts.map
+npm notice 3.4kB dist/main/lib/fetch.js
+npm notice 1.3kB dist/main/lib/fetch.js.map
+npm notice 542B dist/main/lib/helpers.d.ts
+npm notice 532B dist/main/lib/helpers.d.ts.map
+npm notice 2.4kB dist/main/lib/helpers.js
+npm notice 1.3kB dist/main/lib/helpers.js.map
+npm notice 265B dist/main/lib/SupabaseAuthClient.d.ts
+npm notice 283B dist/main/lib/SupabaseAuthClient.d.ts.map
+npm notice 372B dist/main/lib/SupabaseAuthClient.js
+npm notice 256B dist/main/lib/SupabaseAuthClient.js.map
+npm notice 3.9kB dist/main/lib/types.d.ts
+npm notice 2.1kB dist/main/lib/types.d.ts.map
+npm notice 110B dist/main/lib/types.js
+npm notice 112B dist/main/lib/types.js.map
+npm notice 78B dist/main/lib/version.d.ts
+npm notice 149B dist/main/lib/version.d.ts.map
+npm notice 166B dist/main/lib/version.js
+npm notice 150B dist/main/lib/version.js.map
+npm notice 6.2kB dist/main/SupabaseClient.d.ts
+npm notice 3.0kB dist/main/SupabaseClient.d.ts.map
+npm notice 10.7kB dist/main/SupabaseClient.js
+npm notice 5.1kB dist/main/SupabaseClient.js.map
+npm notice 1.2kB dist/module/index.d.ts
+npm notice 698B dist/module/index.d.ts.map
+npm notice 532B dist/module/index.js
+npm notice 493B dist/module/index.js.map
+npm notice 538B dist/module/lib/constants.d.ts
+npm notice 390B dist/module/lib/constants.d.ts.map
+npm notice 791B dist/module/lib/constants.js
+npm notice 850B dist/module/lib/constants.js.map
+npm notice 342B dist/module/lib/fetch.d.ts
+npm notice 326B dist/module/lib/fetch.d.ts.map
+npm notice 2.0kB dist/module/lib/fetch.js
+npm notice 1.3kB dist/module/lib/fetch.js.map
+npm notice 542B dist/module/lib/helpers.d.ts
+npm notice 532B dist/module/lib/helpers.d.ts.map
+npm notice 2.1kB dist/module/lib/helpers.js
+npm notice 1.3kB dist/module/lib/helpers.js.map
+npm notice 265B dist/module/lib/SupabaseAuthClient.d.ts
+npm notice 283B dist/module/lib/SupabaseAuthClient.d.ts.map
+npm notice 206B dist/module/lib/SupabaseAuthClient.js
+npm notice 276B dist/module/lib/SupabaseAuthClient.js.map
+npm notice 3.9kB dist/module/lib/types.d.ts
+npm notice 2.1kB dist/module/lib/types.d.ts.map
+npm notice 44B dist/module/lib/types.js
+npm notice 112B dist/module/lib/types.js.map
+npm notice 78B dist/module/lib/version.d.ts
+npm notice 149B dist/module/lib/version.d.ts.map
+npm notice 68B dist/module/lib/version.js
+npm notice 157B dist/module/lib/version.js.map
+npm notice 6.2kB dist/module/SupabaseClient.d.ts
+npm notice 3.0kB dist/module/SupabaseClient.d.ts.map
+npm notice 10.6kB dist/module/SupabaseClient.js
+npm notice 5.4kB dist/module/SupabaseClient.js.map
+npm notice 223B dist/umd/591.supabase.js
+npm notice 110.8kB dist/umd/supabase.js
+npm notice 2.6kB package.json
+npm notice 1.3kB src/index.ts
+npm notice 909B src/lib/constants.ts
+npm notice 1.2kB src/lib/fetch.ts
+npm notice 1.6kB src/lib/helpers.ts
+npm notice 230B src/lib/SupabaseAuthClient.ts
+npm notice 3.5kB src/lib/types.ts
+npm notice 32B src/lib/version.ts
+npm notice 11.3kB src/SupabaseClient.ts
+npm notice Tarball Details
+npm notice name: @supabase/supabase-js
+npm notice version: 2.45.4
+npm notice filename: supabase-supabase-js-2.45.4.tgz
+npm notice package size: 51.4 kB
+npm notice unpacked size: 235.3 kB
+npm notice shasum: 0bcf8722f1732dfe3e4c5190d23e3938dcc689c3
+npm notice integrity: sha512-E5p8/zOLaQ3a4[...]WFN3pJFQr9/hg==
+npm notice total files: 77
+npm notice
+supabase-supabase-js-2.45.4.tgz
+total 60
+drwxr-xr-x 2 runner runner  4096 Oct 25 13:42 .
+drwxr-xr-x 3 runner runner  4096 Oct 25 13:42 ..
+-rw-r--r-- 1 runner runner 51405 Oct 25 13:42 supabase-supabase-js-2.45.4.tgz
+591.supabase.js
+supabase.js
+-rw-r--r-- 1 runner runner 111088 Oct 25 13:42 cdn.js
+96277ec00e19df476d7396a8a2586b41ed1033dcf680f5aa79b0c556059792b8  cdn.js
+sha256sum: package/dist/umd/supabase.min.js: No such file or directory
