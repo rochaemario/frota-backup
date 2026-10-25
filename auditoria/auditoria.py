@@ -66,6 +66,8 @@ def main():
     bateria('Estranho (so chave publica)',ANON,None,False,False)
     if tok_est:bateria('Estranho com conta criada por fora',ANON,tok_est,False,False)
     t,u=usuario(None)
+    if u:
+        st,b=call('GET','/rest/v1/perfis?select=*&user_id=eq.'+u,SVC);item('Preparo','perfil criado sozinho para conta nova',True,str(b)[:200])
     if t:bateria('Conta sem papel',ANON,t,False,False)
     t,u=usuario('consulta')
     if t:bateria('Papel consulta',ANON,t,True,False,u)
