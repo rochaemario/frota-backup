@@ -68,7 +68,7 @@ def main():
     t,u=usuario(None)
     if u:
         st,b=call('GET','/rest/v1/perfis?select=*&user_id=eq.'+u,SVC);item('Preparo','perfil criado sozinho para conta nova',True,str(b)[:200])
-    if t:bateria('Conta sem papel',ANON,t,False,False)
+    if t:bateria('Conta nova criada pelo admin (entra como Consulta)',ANON,t,True,False)
     t,u=usuario('consulta')
     if t:bateria('Papel consulta',ANON,t,True,False,u)
     t,u=usuario('editor')
