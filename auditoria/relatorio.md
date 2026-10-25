@@ -19,6 +19,7 @@
 |Conta sem papel|alterar registro (doc_update)|ok|bloqueado (status 500 {'code': 'P0002', 'details': None, 'hint': None, 'message': 'not_found'})|
 |Conta sem papel|listar fotos|**PROBLEMA**|conseguiu listar (status 200)|
 |Conta sem papel|enviar arquivo|ok|bloqueado (status 400 {'statusCode': '403', 'error': 'Unauthorized', 'message': 'new row violates row-level secu)|
+|Preparo|perfil de teste consulta|ok|200 |
 |Papel consulta|ler registros do app|ok|conseguiu ler (status 200)|
 |Papel consulta|ler lista de usuarios (perfis)|ok|conseguiu (status 200)|
 |Papel consulta|gravar registro novo|ok|bloqueado (status 403 {'code': '42501', 'details': None, 'hint': None, 'message': 'new row violates row-level se)|
@@ -26,6 +27,7 @@
 |Papel consulta|mudar o proprio papel para admin|ok|bloqueado|
 |Papel consulta|listar fotos|ok|conseguiu listar (status 200)|
 |Papel consulta|enviar arquivo|ok|bloqueado (status 400 {'statusCode': '403', 'error': 'Unauthorized', 'message': 'new row violates row-level secu)|
+|Preparo|perfil de teste editor|ok|200 |
 |Papel editor|ler registros do app|ok|conseguiu ler (status 200)|
 |Papel editor|ler lista de usuarios (perfis)|ok|conseguiu (status 200)|
 |Papel editor|gravar registro novo|ok|conseguiu (status 201 )|
