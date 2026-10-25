@@ -1,0 +1,21 @@
+name: Auditoria de seguranca
+on:
+  workflow_dispatch: {}
+permissions:
+  contents: write
+concurrency: backup
+jobs:
+  auditoria:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - name: Testar acessos
+        env:
+          SUPABASE_SERVICE_KEY: ${{ secrets.SUPABASE_SERVICE_KEY }}
+          ANON_KEY: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InV6cG9haWZ1eHdvamlvbXhxdWtmIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTI3MzY2NjEsImV4cCI6MjEwODMxMjY2MX0.k8oCN52cXzdxhZjx3kE_yNorpkIzHdOvR_xfjRYYqJU
+        run: python3 auditoria/auditoria.py
+      - name: Guardar relatorio
+        run: |
+          git config user.name "Backup Frota"; git config user.email "backup@users.noreply.github.com"
+          git add auditoria/relatorio.md; git commit -m "Relatorio da auditoria" || true; git pull --rebase -q; git push
