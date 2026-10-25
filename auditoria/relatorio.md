@@ -1,4 +1,4 @@
-# Auditoria 2026-10-25 12:55 UTC
+# Auditoria 2026-10-25 13:05 UTC
 
 0 problema(s)
 
@@ -13,7 +13,7 @@
 |Estranho (so chave publica)|alterar registro (doc_update)|ok|bloqueado (status 401 {'code': '42501', 'details': None, 'hint': None, 'message': 'permission denied for functio)|
 |Estranho (so chave publica)|listar fotos|ok|nao listou (status 200)|
 |Estranho (so chave publica)|enviar arquivo|ok|bloqueado (status 400 {'statusCode': '403', 'error': 'Unauthorized', 'message': 'new row violates row-level secu)|
-|Preparo|perfil criado sozinho para conta nova|ok|[{'user_id': '20bd9d05-10fe-4da3-8c3a-447619c58d72', 'email': 'auditoria+1a0a6a5f@example.com', 'nome': 'auditoria+1a0a6a5f', 'papel': 'consulta', 'criado': '2026-10-25T12:55:02.489977+00:00'}]|
+|Preparo|perfil criado sozinho para conta nova|ok|[{'user_id': 'f6f6eb0d-849e-48c8-9286-d7d9f318c7ca', 'email': 'auditoria+54a74b10@example.com', 'nome': 'auditoria+54a74b10', 'papel': 'consulta', 'criado': '2026-10-25T13:05:16.243678+00:00'}]|
 |Conta nova criada pelo admin (entra como Consulta)|ler registros do app|ok|conseguiu ler (status 200)|
 |Conta nova criada pelo admin (entra como Consulta)|ler lista de usuarios (perfis)|ok|conseguiu (status 200)|
 |Conta nova criada pelo admin (entra como Consulta)|gravar registro novo|ok|bloqueado (status 403 {'code': '42501', 'details': None, 'hint': None, 'message': 'new row violates row-level se)|
@@ -36,4 +36,8 @@
 |Papel editor|mudar o proprio papel para admin|ok|bloqueado|
 |Papel editor|listar fotos|ok|conseguiu listar (status 200)|
 |Papel editor|enviar arquivo|ok|conseguiu (status 200 )|
+|Documentos|abrir documento pelo link publico antigo|ok|nao abre|
+|Documentos|abrir documento privado sem login|ok|nao abre|
+|Documentos|estranho gerar link do documento|ok|status 400|
+|Documentos|equipe (Consulta) gerar link do documento|ok|status 200|
 |Geral|ninguem conseguiu virar admin|ok|0|
