@@ -46,7 +46,9 @@ def usuario(papel):
     st,u=call('POST','/auth/v1/admin/users',SVC,body={'email':em,'password':pw,'email_confirm':True});uid=u.get('id') if isinstance(u,dict) else None
     if not uid:return None,None
     LIXO['users'].add(uid)
-    if papel:call('POST','/rest/v1/perfis',SVC,body={'user_id':uid,'email':em,'nome':'Auditoria','papel':papel},extra={'Prefer':'return=minimal'})
+    if papel:
+        st,b=call('POST','/rest/v1/perfis',SVC,body={'user_id':uid,'email':em,'nome':'Auditoria','papel':papel},extra={'Prefer':'return=minimal,resolution=merge-duplicates'})
+        st2,b2=call('GET','/rest/v1/perfis?select=*&user_id=eq.'+uid,SVC);print('perfil',papel,st,str(b)[:200],b2)
     st,t=call('POST','/auth/v1/token?grant_type=password',ANON,body={'email':em,'password':pw})
     return (t.get('access_token') if isinstance(t,dict) else None),uid
 def main():
