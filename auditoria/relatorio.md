@@ -1,6 +1,6 @@
-# Auditoria 2026-10-25 12:54 UTC
+# Auditoria 2026-10-25 12:55 UTC
 
-3 problema(s)
+0 problema(s)
 
 |Quem|Teste|Resultado|Detalhe|
 |-|-|-|-|
@@ -13,13 +13,13 @@
 |Estranho (so chave publica)|alterar registro (doc_update)|ok|bloqueado (status 401 {'code': '42501', 'details': None, 'hint': None, 'message': 'permission denied for functio)|
 |Estranho (so chave publica)|listar fotos|ok|nao listou (status 200)|
 |Estranho (so chave publica)|enviar arquivo|ok|bloqueado (status 400 {'statusCode': '403', 'error': 'Unauthorized', 'message': 'new row violates row-level secu)|
-|Preparo|perfil criado sozinho para conta nova|ok|[{'user_id': 'c5647e0e-5418-41e0-8ce1-edd63a9f5540', 'email': 'auditoria+ded2b55a@example.com', 'nome': 'auditoria+ded2b55a', 'papel': 'consulta', 'criado': '2026-10-25T12:54:24.917787+00:00'}]|
-|Conta sem papel|ler registros do app|**PROBLEMA**|conseguiu ler (status 200)|
-|Conta sem papel|ler lista de usuarios (perfis)|**PROBLEMA**|conseguiu (status 200)|
-|Conta sem papel|gravar registro novo|ok|bloqueado (status 403 {'code': '42501', 'details': None, 'hint': None, 'message': 'new row violates row-level se)|
-|Conta sem papel|alterar registro (doc_update)|ok|bloqueado (status 500 {'code': 'P0002', 'details': None, 'hint': None, 'message': 'not_found'})|
-|Conta sem papel|listar fotos|**PROBLEMA**|conseguiu listar (status 200)|
-|Conta sem papel|enviar arquivo|ok|bloqueado (status 400 {'statusCode': '403', 'error': 'Unauthorized', 'message': 'new row violates row-level secu)|
+|Preparo|perfil criado sozinho para conta nova|ok|[{'user_id': '20bd9d05-10fe-4da3-8c3a-447619c58d72', 'email': 'auditoria+1a0a6a5f@example.com', 'nome': 'auditoria+1a0a6a5f', 'papel': 'consulta', 'criado': '2026-10-25T12:55:02.489977+00:00'}]|
+|Conta nova criada pelo admin (entra como Consulta)|ler registros do app|ok|conseguiu ler (status 200)|
+|Conta nova criada pelo admin (entra como Consulta)|ler lista de usuarios (perfis)|ok|conseguiu (status 200)|
+|Conta nova criada pelo admin (entra como Consulta)|gravar registro novo|ok|bloqueado (status 403 {'code': '42501', 'details': None, 'hint': None, 'message': 'new row violates row-level se)|
+|Conta nova criada pelo admin (entra como Consulta)|alterar registro (doc_update)|ok|bloqueado (status 500 {'code': 'P0002', 'details': None, 'hint': None, 'message': 'not_found'})|
+|Conta nova criada pelo admin (entra como Consulta)|listar fotos|ok|conseguiu listar (status 200)|
+|Conta nova criada pelo admin (entra como Consulta)|enviar arquivo|ok|bloqueado (status 400 {'statusCode': '403', 'error': 'Unauthorized', 'message': 'new row violates row-level secu)|
 |Preparo|perfil de teste consulta|ok|200 |
 |Papel consulta|ler registros do app|ok|conseguiu ler (status 200)|
 |Papel consulta|ler lista de usuarios (perfis)|ok|conseguiu (status 200)|
