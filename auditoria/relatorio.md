@@ -1,4 +1,4 @@
-# Auditoria 2026-10-25 12:48 UTC
+# Auditoria 2026-10-25 12:49 UTC
 
 4 problema(s)
 
@@ -13,6 +13,7 @@
 |Estranho (so chave publica)|alterar registro (doc_update)|ok|bloqueado (status 401 {'code': '42501', 'details': None, 'hint': None, 'message': 'permission denied for functio)|
 |Estranho (so chave publica)|listar fotos|ok|nao listou (status 200)|
 |Estranho (so chave publica)|enviar arquivo|ok|bloqueado (status 400 {'statusCode': '403', 'error': 'Unauthorized', 'message': 'new row violates row-level secu)|
+|Preparo|perfil criado sozinho para conta nova|ok|[{'user_id': '452992e5-da3f-4101-acc6-c649f031e7dd', 'email': 'auditoria+a0a531a9@example.com', 'nome': 'auditoria+a0a531a9', 'papel': 'consulta', 'criado': '2026-10-25T12:49:35.31966+00:00'}]|
 |Conta sem papel|ler registros do app|**PROBLEMA**|conseguiu ler (status 200)|
 |Conta sem papel|ler lista de usuarios (perfis)|**PROBLEMA**|conseguiu (status 200)|
 |Conta sem papel|gravar registro novo|ok|bloqueado (status 403 {'code': '42501', 'details': None, 'hint': None, 'message': 'new row violates row-level se)|
