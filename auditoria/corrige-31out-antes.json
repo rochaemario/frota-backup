@@ -1,0 +1,279 @@
+{
+ "trocas/qtJ02GZIZ6CQqjVuRyW2": {
+  "obs": "",
+  "data": "2026-10-30",
+  "resp": "Joao Geraldo",
+  "itens": [
+   {
+    "un": "un",
+    "pid": "otfuq3nc",
+    "qtd": 1,
+    "desc": "Filtro de ar primario",
+    "espec": "11110175",
+    "estoqueId": ""
+   },
+   {
+    "un": "un",
+    "pid": "vtwkhi6m",
+    "qtd": 1,
+    "desc": "Filtro de ar secundario",
+    "espec": "11110176",
+    "estoqueId": ""
+   },
+   {
+    "un": "un",
+    "pid": "qos3cend",
+    "qtd": 1,
+    "desc": "Filtro de combustivel",
+    "espec": "54315408",
+    "estoqueId": ""
+   },
+   {
+    "un": "un",
+    "pid": "jiu03uah",
+    "qtd": 1,
+    "desc": "Filtro de oleo lubrificante",
+    "espec": "17535679",
+    "estoqueId": ""
+   },
+   {
+    "un": "un",
+    "pid": "ttb0rgu9",
+    "qtd": 1,
+    "desc": "Filtro separador",
+    "espec": "11110683",
+    "estoqueId": ""
+   },
+   {
+    "un": "L",
+    "pid": "664zba20",
+    "qtd": 18,
+    "desc": "Oleo do motor",
+    "espec": "15W40 VOLVO",
+    "estoqueId": ""
+   },
+   {
+    "un": "kit",
+    "pid": "",
+    "qtd": 1,
+    "desc": "KIT L60 Volvo",
+    "espec": "KIT-1000",
+    "estoqueId": "mIQxkCHvCFRzMD3rM1WY"
+   }
+  ],
+  "ajuste": true,
+  "equipId": "PC-01",
+  "exemplo": false,
+  "proximaH": 9483,
+  "horimetro": 8983,
+  "intervalo": 500
+ },
+ "trocas/inf-EH-05-2026-08-29": {
+  "obs": "Troca de filtros e troca de óleo",
+  "data": "2026-08-29",
+  "resp": "",
+  "itens": [
+   {
+    "un": "un",
+    "pid": "o3tny45y",
+    "qtd": 1,
+    "desc": "Filtro de ar motor primário",
+    "espec": "11110175",
+    "estoqueId": ""
+   },
+   {
+    "un": "un",
+    "pid": "7l404ryx",
+    "qtd": 1,
+    "desc": "Filtro de ar motor secundário",
+    "espec": "11110683",
+    "estoqueId": ""
+   },
+   {
+    "un": "un",
+    "pid": "0ucofry1",
+    "qtd": 1,
+    "desc": "Filtro de combustível",
+    "espec": "20805349",
+    "estoqueId": ""
+   },
+   {
+    "un": "un",
+    "pid": "l5say9pd",
+    "qtd": 1,
+    "desc": "Filtro separador",
+    "espec": "FCD2234",
+    "estoqueId": ""
+   },
+   {
+    "un": "un",
+    "pid": "1smepmo9",
+    "qtd": 1,
+    "desc": "Filtro hidráulico",
+    "espec": "14750657",
+    "estoqueId": ""
+   },
+   {
+    "un": "un",
+    "pid": "94nvz0lv",
+    "qtd": 1,
+    "desc": "Filtro lubrificante",
+    "espec": "3831236",
+    "estoqueId": ""
+   },
+   {
+    "un": "un",
+    "pid": "v6fthta7",
+    "qtd": 1,
+    "desc": "Elemento filtro Racor",
+    "espec": "11110683",
+    "estoqueId": ""
+   },
+   {
+    "un": "L",
+    "pid": "oefncd31",
+    "qtd": 20,
+    "desc": "Óleo do motor",
+    "espec": "15W40",
+    "estoqueId": ""
+   }
+  ],
+  "ajuste": true,
+  "equipId": "EH-05",
+  "exemplo": false,
+  "proximaH": 10127,
+  "horimetro": 9627
+ },
+ "equipamentos/EH-05": {
+  "ano": "2019/2019",
+  "obs": "",
+  "area": "Planta",
+  "foto": "",
+  "tipo": "Escavadeira hidraulica",
+  "itens": [
+   {
+    "un": "un",
+    "pid": "v6fthta7",
+    "qtd": 1,
+    "desc": "Elemento filtro Racor",
+    "tipo": "filtro",
+    "espec": "11110683",
+    "proxH": 10127,
+    "ultimaH": 9627,
+    "estoqueId": "",
+    "intervalo": "",
+    "ultimaData": "2026-08-29"
+   },
+   {
+    "un": "un",
+    "pid": "o3tny45y",
+    "qtd": 1,
+    "desc": "Filtro de ar motor primario",
+    "tipo": "filtro",
+    "espec": "11110175",
+    "proxH": 10127,
+    "ultimaH": 9627,
+    "estoqueId": "",
+    "intervalo": "",
+    "ultimaData": "2026-08-29"
+   },
+   {
+    "un": "un",
+    "pid": "7l404ryx",
+    "qtd": 1,
+    "desc": "Filtro de ar motor secundario",
+    "tipo": "filtro",
+    "espec": "11110683",
+    "proxH": 10127,
+    "ultimaH": 9627,
+    "estoqueId": "",
+    "intervalo": "",
+    "ultimaData": "2026-08-29"
+   },
+   {
+    "un": "un",
+    "pid": "0ucofry1",
+    "qtd": 1,
+    "desc": "Filtro de combustivel",
+    "tipo": "filtro",
+    "espec": "20805349",
+    "proxH": 10127,
+    "ultimaH": 9627,
+    "estoqueId": "",
+    "intervalo": "",
+    "ultimaData": "2026-08-29"
+   },
+   {
+    "un": "un",
+    "pid": "1smepmo9",
+    "qtd": 1,
+    "desc": "Filtro hidraulico",
+    "tipo": "filtro",
+    "espec": "14750657",
+    "proxH": 10127,
+    "ultimaH": 9627,
+    "estoqueId": "",
+    "intervalo": "",
+    "ultimaData": "2026-08-29"
+   },
+   {
+    "un": "un",
+    "pid": "94nvz0lv",
+    "qtd": 1,
+    "desc": "Filtro lubrificante",
+    "tipo": "filtro",
+    "espec": "3831236",
+    "proxH": 10127,
+    "ultimaH": 9627,
+    "estoqueId": "",
+    "intervalo": "",
+    "ultimaData": "2026-08-29"
+   },
+   {
+    "un": "un",
+    "pid": "l5say9pd",
+    "qtd": 1,
+    "desc": "Filtro separador",
+    "tipo": "filtro",
+    "espec": "FCD2234",
+    "proxH": 10127,
+    "ultimaH": 9627,
+    "estoqueId": "",
+    "intervalo": "",
+    "ultimaData": "2026-08-29"
+   },
+   {
+    "un": "L",
+    "pid": "oefncd31",
+    "qtd": 20,
+    "desc": "Oleo do motor",
+    "tipo": "oleo",
+    "espec": "15W40",
+    "proxH": 10127,
+    "ultimaH": 9627,
+    "estoqueId": "",
+    "intervalo": "",
+    "ultimaData": "2026-08-29"
+   }
+  ],
+  "marca": "Volvo",
+  "motor": "",
+  "placa": "",
+  "posse": "Rondaflex Ltda",
+  "serie": "VCEC220DCK0245345",
+  "codigo": "EH-05",
+  "frente": "Geral",
+  "modelo": "220",
+  "status": "ativo",
+  "exemplo": false,
+  "locador": "",
+  "alocacao": "DM1",
+  "horimetro": 9753,
+  "usoDiario": "",
+  "docVeiculo": null,
+  "notaFiscal": null,
+  "horimetroReg": "",
+  "horimetroData": "2026-10-15",
+  "intervaloPrev": 500
+ }
+}
