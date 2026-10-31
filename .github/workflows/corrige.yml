@@ -1,0 +1,21 @@
+name: Correcoes de dados (31/10)
+on:
+  workflow_dispatch: {}
+permissions:
+  contents: write
+concurrency: backup
+jobs:
+  corrige:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - name: Corrigir
+        env:
+          SUPABASE_SERVICE_KEY: ${{ secrets.SUPABASE_SERVICE_KEY }}
+        run: python3 auditoria/corrige_31out.py
+      - name: Guardar resultado e copia de antes
+        if: always()
+        run: |
+          git config user.name "Backup Frota"; git config user.email "backup@users.noreply.github.com"
+          git add auditoria/corrige-31out*.json 2>/dev/null; git commit -m "Correcoes de 31/10 (copia de antes guardada)" || true; git pull --rebase -q; git push
