@@ -1,0 +1,21 @@
+name: Notificacoes do administrador
+on:
+  schedule:
+    - cron: '*/30 * * * *'   # a cada 30 min (cota de minutos do GitHub em repositorio privado)
+  workflow_dispatch:
+    inputs:
+      teste: {description: 'Mandar notificacao de teste (1 = sim)', default: '0'}
+concurrency: notifica
+jobs:
+  notifica:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+        with: {sparse-checkout: notifica}
+      - run: pip install -q pywebpush==2.0.0 cryptography
+      - name: Conferir e enviar
+        env:
+          SUPABASE_SERVICE_KEY: ${{ secrets.SUPABASE_SERVICE_KEY }}
+          TESTE: ${{ github.event.inputs.teste || '0' }}
+        run: python3 notifica/notifica.py
