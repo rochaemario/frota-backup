@@ -1,0 +1,154 @@
+[
+ {
+  "equip": "PC-03",
+  "tirados": [
+   "Filtro de ar cond. primario",
+   "Filtro de ar cond. secundario",
+   "Filtro de ar primario"
+  ],
+  "ok": true
+ },
+ {
+  "equip": "PC-02",
+  "tirados": [
+   "Filtro de ar primario",
+   "Filtro de ar secundario"
+  ],
+  "ok": true
+ },
+ {
+  "equip": "RC-01",
+  "tirados": [
+   "Filtro de ar primario",
+   "Filtro de ar secundario"
+  ],
+  "ok": true
+ },
+ {
+  "equip": "PC-01",
+  "tirados": [
+   "Filtro de ar primario",
+   "Filtro de ar secundario"
+  ],
+  "ok": true
+ },
+ {
+  "equip": "CL-02",
+  "tirados": [
+   "Filtro de ar do motor primario"
+  ],
+  "ok": true
+ },
+ {
+  "equip": "EH-04",
+  "tirados": [
+   "Filtro de ar primario",
+   "Filtro de ar secundario"
+  ],
+  "ok": true
+ },
+ {
+  "equip": "MN-01",
+  "tirados": [
+   "Filtro de ar primario",
+   "Filtro de ar secundario"
+  ],
+  "ok": true
+ },
+ {
+  "equip": "EH-01",
+  "tirados": [
+   "Filtro ar motor – externo",
+   "Filtro ar motor – interno"
+  ],
+  "ok": true
+ },
+ {
+  "equip": "CB-19",
+  "tirados": [
+   "Filtro de ar do motor primario",
+   "Filtro de ar do motor secundario"
+  ],
+  "ok": true
+ },
+ {
+  "equip": "CP-03",
+  "tirados": [
+   "Filtro de ar motor secundario"
+  ],
+  "ok": true
+ },
+ {
+  "equip": "EH-07",
+  "tirados": [
+   "Filtro ar motor – externo",
+   "Filtro ar motor – interno"
+  ],
+  "ok": true
+ },
+ {
+  "equip": "EH-05",
+  "tirados": [
+   "Filtro de ar motor primario",
+   "Filtro de ar motor secundario"
+  ],
+  "ok": true
+ },
+ {
+  "equip": "CB-08",
+  "tirados": [
+   "Filtro ar motor secundario",
+   "Filtro do ar motor primario"
+  ],
+  "ok": true
+ },
+ {
+  "equip": "MT-01",
+  "tirados": [
+   "Filtro de ar primario",
+   "Filtro do ar condicionado primario",
+   "Filtro do ar condicionado secundario"
+  ],
+  "ok": true
+ },
+ {
+  "equip": "TE-01",
+  "tirados": [
+   "Filtro de ar do motor primario",
+   "Filtro de ar do motor secundario"
+  ],
+  "ok": true
+ },
+ {
+  "equip": "CB-01",
+  "tirados": [
+   "Filtro ar motor primario",
+   "Filtro de ar motor secundario"
+  ],
+  "ok": true
+ },
+ {
+  "equip": "CB-05",
+  "tirados": [
+   "Filtro ar motor secundario",
+   "Filtro do ar motor primario"
+  ],
+  "ok": true
+ },
+ {
+  "equip": "CB-20",
+  "tirados": [
+   "Filtro de ar do motor primario",
+   "Filtro de ar do motor secundario"
+  ],
+  "ok": true
+ },
+ {
+  "equip": "CB-15",
+  "tirados": [
+   "Filtro de ar do motor primario",
+   "Filtro de ar do motor secundario"
+  ],
+  "ok": true
+ }
+]
