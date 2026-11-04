@@ -130,7 +130,7 @@ if ev and subs:
     for p,sd in list(subs.items()):
         for t,b,ab,tag in ev:
             try:
-                webpush(subscription_info=sd['sub'],data=json.dumps({'t':t,'b':b,'u':ab,'tag':tag}),vapid_private_key=VAP(),vapid_claims={'sub':APP},ttl=86400)
+                webpush(subscription_info=sd['sub'],data=json.dumps({'t':t,'b':b,'u':ab,'tag':tag}),vapid_private_key=VAP(),vapid_claims={'sub':'mailto:frota@rondaflex.app'},ttl=86400)
                 enviados+=1
             except WebPushException as x:
                 code=getattr(x.response,'status_code',0)
@@ -141,6 +141,6 @@ if ev and subs:
 if os.environ.get('TESTE')=='1' and subs:
     from pywebpush import webpush
     for p,sd in subs.items():
-        webpush(subscription_info=sd['sub'],data=json.dumps({'t':'Controle de Frota','b':'Notificacoes ativadas neste celular','u':'','tag':'teste'}),vapid_private_key=VAP(),vapid_claims={'sub':APP},ttl=3600);enviados+=1
+        webpush(subscription_info=sd['sub'],data=json.dumps({'t':'Controle de Frota','b':'Notificacoes ativadas neste celular','u':'','tag':'teste'}),vapid_private_key=VAP(),vapid_claims={'sub':'mailto:frota@rondaflex.app'},ttl=3600);enviados+=1
 put('config/notif',ST)
 print(json.dumps({'primeira':primeira,'eventos':len(ev),'inscricoes':len(subs),'enviados':enviados,'erros':erros},ensure_ascii=False))
