@@ -1,0 +1,147 @@
+[
+ {
+  "equip": "RE-05",
+  "mud": [
+   "marca -> Caterpillar",
+   "modelo -> 416"
+  ],
+  "ok": true
+ },
+ {
+  "equip": "CB-22",
+  "mud": [
+   "modelo CONSTELATION 31280 -> CONSTELLATION 31.280"
+  ],
+  "ok": true
+ },
+ {
+  "equip": "CP-01",
+  "mud": [
+   "modelo CONSTELATION 15180 -> CONSTELLATION 15.180"
+  ],
+  "ok": true
+ },
+ {
+  "equip": "CB-18",
+  "mud": [
+   "modelo CONSTELATION 31280 -> CONSTELLATION 31.280"
+  ],
+  "ok": true
+ },
+ {
+  "equip": "CB-10",
+  "mud": [
+   "modelo FM 540 6X4T -> FM 540"
+  ],
+  "ok": true
+ },
+ {
+  "equip": "CB-06",
+  "mud": [
+   "modelo Axor 2831 6x4 -> AXOR 2831"
+  ],
+  "ok": true
+ },
+ {
+  "equip": "CB-19",
+  "mud": [
+   "modelo CONSTELATION 31280 -> CONSTELLATION 31.280"
+  ],
+  "ok": true
+ },
+ {
+  "equip": "CB-25",
+  "mud": [
+   "modelo CONSTELATION 31280 -> CONSTELLATION 31.280"
+  ],
+  "ok": true
+ },
+ {
+  "equip": "MT-01",
+  "mud": [
+   "marca -> JCB",
+   "modelo -> 540-170"
+  ],
+  "ok": true
+ },
+ {
+  "equip": "CB-17",
+  "mud": [
+   "modelo CONSTELATION 31280 -> CONSTELLATION 31.280"
+  ],
+  "ok": true
+ },
+ {
+  "equip": "CL-01",
+  "mud": [
+   "modelo EURO 3 WORKER 13180 -> WORKER 13.180"
+  ],
+  "ok": true
+ },
+ {
+  "equip": "CB-20",
+  "mud": [
+   "modelo CONSTELATION 31280 -> CONSTELLATION 31.280"
+  ],
+  "ok": true
+ },
+ {
+  "equip": "CB-15",
+  "mud": [
+   "modelo CONSTELATION 31280 -> CONSTELLATION 31.280"
+  ],
+  "ok": true
+ },
+ {
+  "equip": "CB-23",
+  "mud": [
+   "modelo CONSTELATION 31280 -> CONSTELLATION 31.280"
+  ],
+  "ok": true
+ },
+ {
+  "equip": "CB-03",
+  "mud": [
+   "modelo CONSTELATION 31320 -> CONSTELLATION 31.320"
+  ],
+  "ok": true
+ },
+ {
+  "equip": "CB-12",
+  "mud": [
+   "modelo CONSTELATION 21280 -> CONSTELLATION 21.280"
+  ],
+  "ok": true
+ },
+ {
+  "equip": "CB-16",
+  "mud": [
+   "modelo CONSTELATION 31280 -> CONSTELLATION 31.280"
+  ],
+  "ok": true
+ },
+ {
+  "equip": "CB-11",
+  "mud": [
+   "modelo CONSTELATION 31280 -> CONSTELLATION 31.280"
+  ],
+  "ok": true
+ },
+ {
+  "equip": "CB-14",
+  "mud": [
+   "modelo CONSTELATION 31280 -> CONSTELLATION 31.280"
+  ],
+  "ok": true
+ },
+ {
+  "kit": "KIT-1000",
+  "nome": "KIT VOLVO L60 - 1000H",
+  "ok": true
+ },
+ {
+  "kit": "KIT-500",
+  "nome": "KIT CATERPILLAR 416 - 500H",
+  "ok": true
+ }
+]
