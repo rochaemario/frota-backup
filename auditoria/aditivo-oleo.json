@@ -1,0 +1,129 @@
+[
+ {
+  "estoque": "Bardahl B12 Turbo",
+  "tipo": "Aditivo / Oleo lubrificante",
+  "ok": true
+ },
+ {
+  "equip": "CP-03",
+  "mud": [
+   "Bardahl B12 Turbo -> Aditivo / Oleo lubrificante"
+  ],
+  "ok": true
+ },
+ {
+  "equip": "CB-04",
+  "mud": [
+   "Bardahl B12 Turbo -> Aditivo / Oleo lubrificante"
+  ],
+  "ok": true
+ },
+ {
+  "equip": "CB-19",
+  "mud": [
+   "Oleo Bardahl -> Aditivo / Oleo lubrificante"
+  ],
+  "ok": true
+ },
+ {
+  "equip": "CB-08",
+  "mud": [
+   "Oleo Bardahl -> Aditivo / Oleo lubrificante",
+   "Ursa Premium TDX 15W-40 -> tipo Oleo",
+   "Ursa Premium TDX 15W-40 -> espec 15W-40",
+   "Troca de oleo do motor sai do plano (substituido por Ursa Premium TDX 15W-40)"
+  ],
+  "ok": true
+ },
+ {
+  "equip": "CB-25",
+  "mud": [
+   "Bardahl B12 Turbo -> Aditivo / Oleo lubrificante"
+  ],
+  "ok": true
+ },
+ {
+  "equip": "CB-03",
+  "mud": [
+   "Oleo Bardahl -> Aditivo / Oleo lubrificante"
+  ],
+  "ok": true
+ },
+ {
+  "equip": "CB-05",
+  "mud": [
+   "Oleo Bardahl -> Aditivo / Oleo lubrificante"
+  ],
+  "ok": true
+ },
+ {
+  "equip": "CB-07",
+  "mud": [
+   "Oleo Bardahl -> Aditivo / Oleo lubrificante"
+  ],
+  "ok": true
+ },
+ {
+  "equip": "CB-09",
+  "mud": [
+   "Oleo Bardahl -> Aditivo / Oleo lubrificante"
+  ],
+  "ok": true
+ },
+ {
+  "equip": "CL-01",
+  "mud": [
+   "Oleo Bardahl -> Aditivo / Oleo lubrificante"
+  ],
+  "ok": true
+ },
+ {
+  "equip": "CB-20",
+  "mud": [
+   "Oleo Bardahl -> Aditivo / Oleo lubrificante"
+  ],
+  "ok": true
+ },
+ {
+  "equip": "CB-23",
+  "mud": [
+   "Bardahl B12 Turbo -> Aditivo / Oleo lubrificante"
+  ],
+  "ok": true
+ },
+ {
+  "equip": "CB-12",
+  "mud": [
+   "Oleo Bardahl -> Aditivo / Oleo lubrificante"
+  ],
+  "ok": true
+ },
+ {
+  "equip": "TE-01",
+  "mud": [
+   "Bardahl -> Aditivo / Oleo lubrificante"
+  ],
+  "ok": true
+ },
+ {
+  "equip": "CB-11",
+  "mud": [
+   "Oleo Bardahl -> Aditivo / Oleo lubrificante"
+  ],
+  "ok": true
+ },
+ {
+  "equip": "CB-14",
+  "mud": [
+   "Oleo Bardahl -> Aditivo / Oleo lubrificante"
+  ],
+  "ok": true
+ },
+ {
+  "equip": "CB-16",
+  "mud": [
+   "Oleo Bardahl -> Aditivo / Oleo lubrificante"
+  ],
+  "ok": true
+ }
+]
