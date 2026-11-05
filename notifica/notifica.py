@@ -57,7 +57,7 @@ for aid,a in avisos.items():
         if novas:
             m=novas[-1];ev.append((f"Aviso de {nome(m.get('de'))}",(m.get('texto') or 'Anexo')[:120]+(f' (+{len(novas)-1})' if len(novas)>1 else ''),'av:'+aid,'av-'+aid))
 ST['av_ts']=max([avts]+[m.get('ts') or 0 for a in avisos.values() for m in [{'ts':a.get('ts',0)}]+list(a.get('resp') or [])])
-# ---- preventivas (intervalo do equipamento, como o cronograma)
+# ---- preventivas (item que vence primeiro, como o cronograma)
 def eh_vl(e):
     import unicodedata;t=unicodedata.normalize('NFD',str(e.get('tipo') or '')).encode('ascii','ignore').decode().lower().strip();return t=='veiculo leve'
 def base(eid):
@@ -66,13 +66,38 @@ def base(eid):
     t=max(ts,key=lambda x:((x.get('data') or ''),float(x.get('horimetro') or 0)))
     d=sum(float(x.get('delta') or 0) for x in trocas.values() if x.get('equipId')==eid and x.get('tipo')=='hmtroca' and (x.get('data') or '')>(t.get('data') or ''))
     return float(t.get('horimetro') or 0)+d
+def fnum(x):
+    try:return float(x) if x not in ('',None) else None
+    except (TypeError,ValueError):return None
+def dlt(eid,dt):return sum(float(x.get('delta') or 0) for x in trocas.values() if x.get('equipId')==eid and x.get('tipo')=='hmtroca' and (x.get('data') or '')>(dt or ''))
+def inf_ult(eid):
+    ts=[t for t in trocas.values() if t.get('equipId')==eid and t.get('tipo')=='informada']
+    return max(ts,key=lambda x:x.get('data') or '') if ts else None
+# como o app: cada item vence pelo proprio intervalo (sem intervalo proprio, o da ficha), contado da ultima troca dele
+def prox_eq(eid,e,iv):
+    its=e.get('itens') or []
+    if not its:return round(base(eid)+iv,1) if iv>0 else None
+    i0=inf_ult(eid);ps=[]
+    for it in its:
+        s=it.get('ivSel')
+        if s=='aval':continue
+        ivI=fnum(s) or iv
+        u=fnum(it.get('ultimaH'))
+        if i0 and (u is None or (i0.get('data') or '')>(it.get('ultimaData') or '')):u=float(i0.get('horimetro') or 0)+dlt(eid,i0.get('data'))
+        if u is None:u=base(eid)
+        pH=fnum(it.get('proxH'))
+        p=pH if it.get('reprog') and pH is not None else (u+ivI if ivI else pH)
+        if p is not None:ps.append(p)
+    return round(min(ps),1) if ps else None
 ORD=['', '100','75','50','25','V']
 pst=ST.get('prev',{});novo_prev={}
 for eid,e in eqs.items():
     try:iv=float(e.get('intervaloPrev') or 0);hm=float(e.get('horimetro'))
     except (TypeError,ValueError):continue
-    if iv<=0 or (eh_vl(e) and e.get('soCad') is not False):continue
-    prox=round(base(eid)+iv,1);falta=round(prox-hm,1)
+    if eh_vl(e) and e.get('soCad') is not False:continue
+    prox=prox_eq(eid,e,iv)
+    if prox is None:continue
+    falta=round(prox-hm,1)
     lvl='V' if falta<=0 else (str(int(math.ceil(falta/25)*25)) if falta<=100 else '')
     old=pst.get(eid) or {}
     if old.get('prox')!=prox:old={'prox':prox,'lvl':''}
