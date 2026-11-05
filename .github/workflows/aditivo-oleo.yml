@@ -1,0 +1,21 @@
+name: Aditivo B12 e oleo de mesma referencia (05/11)
+on:
+  workflow_dispatch: {}
+permissions:
+  contents: write
+concurrency: backup
+jobs:
+  corrige:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - name: Corrigir
+        env:
+          SUPABASE_SERVICE_KEY: ${{ secrets.SUPABASE_SERVICE_KEY }}
+        run: python3 auditoria/aditivo_oleo.py
+      - name: Guardar resultado e copia de antes
+        if: always()
+        run: |
+          git config user.name "Backup Frota"; git config user.email "backup@users.noreply.github.com"
+          git add auditoria/aditivo-oleo*.json 2>/dev/null; git commit -m "Aditivo B12 e oleo de mesma referencia (copia de antes guardada)" || true; git pull --rebase -q; git push
