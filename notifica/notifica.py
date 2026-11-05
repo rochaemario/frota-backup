@@ -66,6 +66,11 @@ def base(eid):
     t=max(ts,key=lambda x:((x.get('data') or ''),float(x.get('horimetro') or 0)))
     d=sum(float(x.get('delta') or 0) for x in trocas.values() if x.get('equipId')==eid and x.get('tipo')=='hmtroca' and (x.get('data') or '')>(t.get('data') or ''))
     return float(t.get('horimetro') or 0)+d
+# valor lancado: como foi digitado (4.9 -> 4,9; 2534 -> 2.534)
+def nl(v):
+    try:v=float(v)
+    except (TypeError,ValueError):return str(v or '')
+    t=f'{v:,.2f}'.rstrip('0').rstrip('.');return t.replace(',','_').replace('.',',').replace('_','.')
 def fnum(x):
     try:return float(x) if x not in ('',None) else None
     except (TypeError,ValueError):return None
@@ -104,7 +109,7 @@ for eid,e in eqs.items():
     if lvl and ORD.index(lvl)>ORD.index(old.get('lvl','')):
         cod=e.get('codigo') or eid
         ev.append((f'{cod} · preventiva vencida' if lvl=='V' else f'{cod} · faltam {int(falta) if falta==int(falta) else falta} h',
-                   f"Proxima com {prox:,.0f} h · horimetro {hm:,.0f} h".replace(',', '.'),'eq:'+eid,'pv-'+eid))
+                   f"Proxima com {prox:,.0f} h".replace(',', '.')+f" · horimetro {nl(hm)} h",'eq:'+eid,'pv-'+eid))
         old['lvl']=lvl
     novo_prev[eid]=old
 ST['prev']=novo_prev
@@ -128,7 +133,7 @@ for tid,t in trocas.items():
     if em>lts and por and por not in ADM:
         cod=(eqs.get(t.get('equipId')) or {}).get('codigo') or t.get('equipId','')
         tp='filtro de ar' if t.get('tipo')=='filtro_ar' else 'preventiva informada' if t.get('tipo')=='informada' else 'troca de horimetro' if t.get('tipo')=='hmtroca' else 'preventiva'
-        ev.append((f'{nome(por)} registrou {tp}',f"{cod} · {len(t.get('itens') or [])} itens · {t.get('horimetro','')} h",'tr:'+tid,'tr-'+tid))
+        ev.append((f'{nome(por)} registrou {tp}',f"{cod} · {len(t.get('itens') or [])} itens · {nl(t.get('horimetro',''))} h",'tr:'+tid,'tr-'+tid))
     mx=max(mx,em)
 for mid,m in movs.items():
     em=m.get('_em') or 0;por=m.get('_por')
@@ -143,7 +148,7 @@ for eid,e in eqs.items():
     mx=max(mx,em)
 if hm:
     quem=sorted({nome(p) for p,_,_ in hm})
-    ev.append((f"{', '.join(quem)} lancou horimetro",'; '.join(f'{c} {h} h' for _,c,h in hm[:6])+(f' (+{len(hm)-6})' if len(hm)>6 else ''),'leit','hm'))
+    ev.append((f"{', '.join(quem)} lancou horimetro",'; '.join(f'{c} {nl(h)} h' for _,c,h in hm[:6])+(f' (+{len(hm)-6})' if len(hm)>6 else ''),'leit','hm'))
 ST['lanc_ts']=mx
 # ---- envio
 ST['ultima']=agora
