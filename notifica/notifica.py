@@ -150,6 +150,33 @@ if hm:
     quem=sorted({nome(p) for p,_,_ in hm})
     ev.append((f"{', '.join(quem)} lancou horimetro",'; '.join(f'{c} {nl(h)} h' for _,c,h in hm[:6])+(f' (+{len(hm)-6})' if len(hm)>6 else ''),'leit','hm'))
 ST['lanc_ts']=mx
+# ---- equipamento parado ou de volta a operar (OS); vale para o app oficial e para o teste
+for ns in ('','teste/'):
+    def sub(c):
+        pre=ns+c+'/';return {p[len(pre):]:d for p,d in D.items() if p.startswith(pre) and '/' not in p[len(pre):]}
+    O=sub('os');E=sub('ose');last={}
+    def marca(eq,ts,st,oid):
+        if eq and st in ('parado','operando') and ts and (eq not in last or ts>last[eq][0]):last[eq]=(ts,st,oid)
+    for oid,d in O.items():
+        o=d.get('o') or {};marca(o.get('eq'),o.get('ts'),o.get('estado'),oid)
+    for eid,e in E.items():
+        o=(O.get(e.get('os')) or {}).get('o') or {};eq=o.get('eq');t=e.get('tipo')
+        if t=='concluir':marca(eq,e.get('ts'),e.get('estado'),e.get('os'))
+        elif t=='adendo':
+            for k in e.get('corr') or []:
+                if k.get('campo')=='estado':marca(eq,e.get('ts'),k.get('para'),e.get('os'))
+        elif t=='edit' and e.get('adm') and e.get('campo')=='estado':marca(eq,e.get('ts'),e.get('para'),e.get('os'))
+    k='par_'+(ns.strip('/') or 'oficial');ant=ST.get(k);novo={eq:v[1] for eq,v in last.items()}
+    if ant is not None:
+        tg='[TESTE] ' if ns else ''
+        for eq,(ts,st,oid) in last.items():
+            if st==ant.get(eq,'operando'):continue
+            if st=='operando' and eq not in ant:continue
+            od=O.get(oid) or {};num=od.get('num');o=od.get('o') or {}
+            cod=((D.get(ns+'equipamentos/'+eq) or {}).get('codigo')) or eq
+            if st=='parado':ev.append((f"{tg}{cod} parado",f"{'OS '+str(num) if num else 'OS nova'} · {(o.get('aconteceu') or '')[:100]}",'' if ns else 'os:'+oid,'par-'+ns+eq))
+            else:ev.append((f"{tg}{cod} voltou a operar",f"{'OS '+str(num) if num else 'OS nova'}",'' if ns else 'os:'+oid,'par-'+ns+eq))
+    ST[k]=novo
 # ---- envio
 ST['ultima']=agora
 if primeira:ev=[]
