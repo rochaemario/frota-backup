@@ -174,8 +174,8 @@ for ns in ('','teste/'):
             if st=='operando' and eq not in ant:continue
             od=O.get(oid) or {};num=od.get('num');o=od.get('o') or {}
             cod=((D.get(ns+'equipamentos/'+eq) or {}).get('codigo')) or eq
-            if st=='parado':ev.append((f"{tg}{cod} parado",f"{'OS '+str(num) if num else 'OS nova'} · {(o.get('aconteceu') or '')[:100]}",'' if ns else 'os:'+oid,'par-'+ns+eq))
-            else:ev.append((f"{tg}{cod} voltou a operar",f"{'OS '+str(num) if num else 'OS nova'}",'' if ns else 'os:'+oid,'par-'+ns+eq))
+            if st=='parado':ev.append((f"{tg}{cod} parado",f"{'OS '+str(num).zfill(4) if num else 'OS nova'} · {(o.get('aconteceu') or '')[:100]}",'' if ns else 'os:'+oid,'par-'+ns+eq))
+            else:ev.append((f"{tg}{cod} voltou a operar",f"{'OS '+str(num).zfill(4) if num else 'OS nova'}",'' if ns else 'os:'+oid,'par-'+ns+eq))
     ST[k]=novo
 # ---- envio
 ST['ultima']=agora
