@@ -1,0 +1,24 @@
+name: Servico de login do mecanico (instalar)
+on: workflow_dispatch
+jobs:
+  instalar:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Instalar a funcao "mecanico" no Supabase
+        env:
+          SUPABASE_ACCESS_TOKEN: ${{ secrets.SUPABASE_ACCESS_TOKEN }}
+        run: |
+          test -n "$SUPABASE_ACCESS_TOKEN" || { echo "Falta o segredo SUPABASE_ACCESS_TOKEN"; exit 1; }
+          cd supabase/functions/mecanico
+          code=$(curl -sS -o /tmp/r.json -w '%{http_code}' -X POST \
+            "https://api.supabase.com/v1/projects/uzpoaifuxwojiomxqukf/functions/deploy?slug=mecanico" \
+            -H "Authorization: Bearer $SUPABASE_ACCESS_TOKEN" \
+            -F 'metadata={"entrypoint_path":"index.ts","name":"mecanico","verify_jwt":false};type=application/json' \
+            -F "file=@index.ts;type=application/typescript")
+          echo "HTTP $code"; cat /tmp/r.json; echo
+          test "$code" -lt 300
+      - name: Conferir
+        run: |
+          sleep 8
+          curl -sS -X POST https://uzpoaifuxwojiomxqukf.supabase.co/functions/v1/mecanico -H 'Content-Type: application/json' -d '{"acao":"entrar","uid":"x","codigo":"y"}'; echo
