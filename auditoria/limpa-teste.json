@@ -1,0 +1,18 @@
+{
+ "aplicado": true,
+ "os": 3,
+ "eventos": 5,
+ "avisos": 5,
+ "osNums": [
+  1,
+  2,
+  3
+ ],
+ "mecanicos_sai": [
+  "Joao Geraldo",
+  "Douglas Guilardi",
+  "Marrone",
+  "Franklyn"
+ ],
+ "mecanicos_ficam": []
+}
