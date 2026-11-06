@@ -1,0 +1,24 @@
+name: Limpar versao de teste (05/11)
+on:
+  workflow_dispatch:
+    inputs:
+      aplicar: {description: 'Apagar de verdade (1) ou so listar (0)', default: '0'}
+permissions:
+  contents: write
+concurrency: backup
+jobs:
+  limpa:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - name: Limpar
+        env:
+          SUPABASE_SERVICE_KEY: ${{ secrets.SUPABASE_SERVICE_KEY }}
+          APLICAR: ${{ inputs.aplicar }}
+        run: python3 auditoria/limpa_teste.py
+      - name: Guardar copia de antes
+        if: always() && inputs.aplicar == '1'
+        run: |
+          git config user.name "Backup Frota"; git config user.email "backup@users.noreply.github.com"
+          git add auditoria/limpa-teste*.json; git commit -m "Limpeza do teste (copia de antes guardada)" || true; git pull --rebase -q; git push
