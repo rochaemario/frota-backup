@@ -39,7 +39,11 @@ def col(c):return {p.split('/',1)[1]:d for p,d in D.items() if p.startswith(c+'/
 perfis=rq('GET','/rest/v1/perfis?select=user_id,nome,email,papel') or []
 NOME={p['user_id']:(p.get('nome') or (p.get('email') or '').split('@')[0] or 'Alguem') for p in perfis}
 ADM={p['user_id'] for p in perfis if p.get('papel')=='admin'}
-if (D.get('config/push') or {}).get('vapid')!=PUB:put('config/push',{'vapid':PUB})
+# chave publica e a lista de administradores (o mecanico usa para mandar aviso de falta de peca), no app oficial e no teste
+for _ns in ('','teste/'):
+    _cp={'vapid':PUB,'admins':sorted(ADM)}
+    _at=D.get(_ns+'config/push') or {}
+    if _at.get('vapid')!=PUB or sorted(_at.get('admins') or [])!=_cp['admins']:put(_ns+'config/push',_cp)
 subs={p:d for p,d in col('push').items() if d.get('uid') in ADM and d.get('sub')}
 eqs={i:e for i,e in col('equipamentos').items() if e.get('status')!='inativo'}
 trocas=col('trocas');est=col('estoque');movs=col('movs');avisos=col('avisos')
@@ -55,7 +59,7 @@ for aid,a in avisos.items():
     for u in ADM & part:
         novas=[m for m in msgs if m.get('de')!=u and (m.get('ts') or 0)>avts]
         if novas:
-            m=novas[-1];ev.append((f"Aviso de {nome(m.get('de'))}",(m.get('texto') or 'Anexo')[:120]+(f' (+{len(novas)-1})' if len(novas)>1 else ''),'av:'+aid,'av-'+aid))
+            m=novas[-1];ev.append((f"Aviso de {(a.get('deNome') if m.get('de')==a.get('de') and a.get('deNome') else nome(m.get('de')))}",(m.get('texto') or 'Anexo')[:120]+(f' (+{len(novas)-1})' if len(novas)>1 else ''),'av:'+aid,'av-'+aid))
 ST['av_ts']=max([avts]+[m.get('ts') or 0 for a in avisos.values() for m in [{'ts':a.get('ts',0)}]+list(a.get('resp') or [])])
 # ---- preventivas (item que vence primeiro, como o cronograma)
 def eh_vl(e):
