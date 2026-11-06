@@ -1,6 +1,7 @@
 // Controle de Frota · acesso do mecanico sem e-mail e sem senha.
 // acao "entrar": o mecanico abre o link (uid + codigo de uso unico) e recebe uma senha nova so para entrar; o codigo deixa de valer.
-// acoes do administrador: "criar" (novo mecanico + codigo), "codigo" (novo codigo; o anterior deixa de valer), "ativo" (ativar/desativar).
+// acoes do administrador: "criar" (novo mecanico + codigo), "codigo" (novo codigo; o anterior deixa de valer), "ativo" (ativar/desativar),
+// "estado" (ja entrou? QR esperando?), "apagar" (excluir o acesso; o app so oferece para quem nao tem lancamentos).
 import { createClient } from "jsr:@supabase/supabase-js@2";
 const U = Deno.env.get("SUPABASE_URL")!, K = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!;
 const cors = { "Access-Control-Allow-Origin": "*", "Access-Control-Allow-Headers": "authorization, x-client-info, apikey, content-type", "Access-Control-Allow-Methods": "POST, OPTIONS" };
@@ -62,6 +63,15 @@ async function trata(req: Request): Promise<Response> {
     const r = await adm.auth.admin.updateUserById(uid, { ban_duration: on ? "none" : "876000h", app_metadata: { ...am, mec_off: !on, ...(on ? {} : { mec_hash: null }) } });
     if (r.error) return J({ erro: "falha" }, 500);
     await adm.from("perfis").update({ papel: on ? "mecanico" : null }).eq("user_id", uid);
+    return J({ ok: true });
+  }
+  if (acao === "estado") {
+    return J({ usado: !!am.mec_usado, pendente: !!am.mec_hash, off: !!am.mec_off });
+  }
+  if (acao === "apagar") {
+    await adm.from("perfis").delete().eq("user_id", uid);
+    const r = await adm.auth.admin.deleteUser(uid);
+    if (r.error) return J({ erro: "falha", msg: r.error.message }, 500);
     return J({ ok: true });
   }
   return J({ erro: "acao" }, 400);
