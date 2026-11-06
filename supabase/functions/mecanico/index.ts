@@ -7,15 +7,19 @@ const cors = { "Access-Control-Allow-Origin": "*", "Access-Control-Allow-Headers
 const J = (b: unknown, s = 200) => new Response(JSON.stringify(b), { status: s, headers: { ...cors, "Content-Type": "application/json" } });
 const sha = async (t: string) => [...new Uint8Array(await crypto.subtle.digest("SHA-256", new TextEncoder().encode(t)))].map((b) => b.toString(16).padStart(2, "0")).join("");
 const rnd = (n: number) => { const a = new Uint8Array(n); crypto.getRandomValues(a); return [...a].map((b) => "abcdefghijkmnpqrstuvwxyz23456789"[b % 32]).join(""); };
+const UUID = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
 Deno.serve(async (req) => {
   if (req.method === "OPTIONS") return new Response("ok", { headers: cors });
+  try { return await trata(req); } catch (e) { return J({ erro: "falha", msg: String((e as Error)?.message || e) }, 500); }
+});
+async function trata(req: Request): Promise<Response> {
   const adm = createClient(U, K, { auth: { persistSession: false, autoRefreshToken: false } });
   let b: Record<string, unknown> = {};
   try { b = await req.json(); } catch { /* vazio */ }
   const acao = String(b.acao || "");
   if (acao === "entrar") {
     const uid = String(b.uid || ""), codigo = String(b.codigo || "");
-    if (!uid || !codigo) return J({ erro: "codigo" }, 400);
+    if (!UUID.test(uid) || !codigo) return J({ erro: "codigo" }, 403);
     const { data, error } = await adm.auth.admin.getUserById(uid);
     const u = data?.user;
     if (error || !u) return J({ erro: "codigo" }, 403);
@@ -43,6 +47,7 @@ Deno.serve(async (req) => {
     return J({ uid: data.user.id, codigo });
   }
   const uid = String(b.uid || "");
+  if (!UUID.test(uid)) return J({ erro: "mecanico" }, 404);
   const { data: alvo } = await adm.auth.admin.getUserById(uid);
   const am = (alvo?.user?.app_metadata || {}) as Record<string, unknown>;
   if (!alvo?.user || !am.mec) return J({ erro: "mecanico" }, 404);
@@ -60,4 +65,4 @@ Deno.serve(async (req) => {
     return J({ ok: true });
   }
   return J({ erro: "acao" }, 400);
-});
+}

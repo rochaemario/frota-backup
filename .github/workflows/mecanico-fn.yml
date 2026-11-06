@@ -21,4 +21,4 @@ jobs:
       - name: Conferir
         run: |
           sleep 8
-          curl -sS -X POST https://uzpoaifuxwojiomxqukf.supabase.co/functions/v1/mecanico -H 'Content-Type: application/json' -d '{"acao":"entrar","uid":"x","codigo":"y"}'; echo
+          curl -sS -X POST https://uzpoaifuxwojiomxqukf.supabase.co/functions/v1/mecanico -H 'Content-Type: application/json' -d '{"acao":"entrar","uid":"00000000-0000-0000-0000-000000000000","codigo":"y"}'; echo; curl -sS -X POST https://uzpoaifuxwojiomxqukf.supabase.co/functions/v1/mecanico -H "Content-Type: application/json" -d '{"acao":"criar","nome":"x"}'; echo
