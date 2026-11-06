@@ -159,7 +159,9 @@ for ns in ('','teste/'):
     def sub(c):
         pre=ns+c+'/';return {p[len(pre):]:d for p,d in D.items() if p.startswith(pre) and '/' not in p[len(pre):]}
     O=sub('os');E=sub('ose');last={}
+    cx={e.get('os') for e in E.values() if e.get('tipo')=='cancelar'}  # OS cancelada nao conta
     def marca(eq,ts,st,oid):
+        if oid in cx:return
         if eq and st in ('parado','operando') and ts and (eq not in last or ts>last[eq][0]):last[eq]=(ts,st,oid)
     for oid,d in O.items():
         o=d.get('o') or {};marca(o.get('eq'),o.get('ts'),o.get('estado'),oid)
