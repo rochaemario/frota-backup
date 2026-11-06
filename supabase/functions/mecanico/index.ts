@@ -1,4 +1,5 @@
 // Controle de Frota · acesso do mecanico sem e-mail e sem senha.
+// acoes do mecanico: "pin_entrar" (matricula + senha de 6 numeros), "pin_def" (cria/troca a senha, ja conectado).
 // acao "entrar": o mecanico abre o link (uid + codigo de uso unico) e recebe uma senha nova so para entrar; o codigo deixa de valer.
 // acoes do administrador: "criar" (novo mecanico + codigo), "codigo" (novo codigo; o anterior deixa de valer), "ativo" (ativar/desativar),
 // "estado" (ja entrou? QR esperando?), "apagar" (excluir o acesso; o app so oferece para quem nao tem lancamentos).
@@ -31,10 +32,49 @@ async function trata(req: Request): Promise<Response> {
     if (r.error) return J({ erro: "falha" }, 500);
     return J({ email: u.email, senha });
   }
-  // daqui para baixo, so o administrador
+  // entrar com matricula + senha de 6 numeros (o mecanico cria a senha depois de entrar pelo QR)
+  if (acao === "pin_entrar") {
+    const ns = b.ns === "teste/" ? "teste/" : "", mat = String(b.mat || "").trim(), pin = String(b.pin || "");
+    if (!mat || !/^\d{6}$/.test(pin)) return J({ erro: "senha" }, 403);
+    const { data: dc } = await adm.from("docs").select("data").eq("path", ns + "config/mecanicos").maybeSingle();
+    const lista = ((dc?.data as Record<string, unknown>)?.lista || []) as Record<string, unknown>[];
+    const nz = (x: unknown) => String(x || "").trim().replace(/^0+(?=.)/, "").toLowerCase();
+    const mm = lista.filter((m) => m.real && nz(m.mat) === nz(mat));
+    if (mm.length !== 1) return J({ erro: "senha" }, 403);
+    const uid = String(mm[0].uid || "");
+    if (!UUID.test(uid)) return J({ erro: "senha" }, 403);
+    const { data } = await adm.auth.admin.getUserById(uid);
+    const u = data?.user;
+    if (!u) return J({ erro: "senha" }, 403);
+    const m = (u.app_metadata || {}) as Record<string, unknown>;
+    if (!m.mec || m.mec_off || mm[0].ativo === false) return J({ erro: "off" }, 403);
+    if (!m.mec_pin) return J({ erro: "sem_senha" }, 403);
+    const agora = Date.now();
+    if (Number(m.mec_trava || 0) > agora) return J({ erro: "trava", min: Math.ceil((Number(m.mec_trava) - agora) / 60000) }, 429);
+    if (m.mec_pin !== await sha(uid + ":" + pin)) {
+      const f = Number(m.mec_falha || 0) + 1;
+      await adm.auth.admin.updateUserById(uid, { app_metadata: { ...m, mec_falha: f >= 5 ? 0 : f, mec_trava: f >= 5 ? agora + 15 * 60000 : 0 } });
+      return J(f >= 5 ? { erro: "trava", min: 15 } : { erro: "senha", resta: 5 - f }, 403);
+    }
+    const senha = rnd(40);
+    const r = await adm.auth.admin.updateUserById(uid, { password: senha, app_metadata: { ...m, mec_falha: 0, mec_trava: 0, mec_usado: agora } });
+    if (r.error) return J({ erro: "falha" }, 500);
+    return J({ email: u.email, senha });
+  }
+  // daqui para baixo, so quem esta conectado
   const tok = (req.headers.get("Authorization") || "").replace(/^Bearer\s+/i, "");
   const { data: eu } = await adm.auth.getUser(tok);
   if (!eu?.user) return J({ erro: "login" }, 401);
+  // o proprio mecanico cria ou troca a senha de 6 numeros
+  if (acao === "pin_def") {
+    const pin = String(b.pin || ""), me = eu.user, m = (me.app_metadata || {}) as Record<string, unknown>;
+    if (!m.mec || m.mec_off) return J({ erro: "mecanico" }, 403);
+    if (!/^\d{6}$/.test(pin) || /^(\d)\1{5}$/.test(pin) || "0123456789".includes(pin) || "9876543210".includes(pin)) return J({ erro: "fraca" }, 400);
+    const r = await adm.auth.admin.updateUserById(me.id, { app_metadata: { ...m, mec_pin: await sha(me.id + ":" + pin), mec_falha: 0, mec_trava: 0 } });
+    if (r.error) return J({ erro: "falha" }, 500);
+    return J({ ok: true });
+  }
+  // daqui para baixo, so o administrador
   const { data: pf } = await adm.from("perfis").select("papel").eq("user_id", eu.user.id).maybeSingle();
   if (!pf || pf.papel !== "admin") return J({ erro: "admin" }, 403);
   if (acao === "criar") {
@@ -66,7 +106,7 @@ async function trata(req: Request): Promise<Response> {
     return J({ ok: true });
   }
   if (acao === "estado") {
-    return J({ usado: !!am.mec_usado, pendente: !!am.mec_hash, off: !!am.mec_off });
+    return J({ usado: !!am.mec_usado, pendente: !!am.mec_hash, off: !!am.mec_off, pin: !!am.mec_pin });
   }
   if (acao === "apagar") {
     await adm.from("perfis").delete().eq("user_id", uid);
