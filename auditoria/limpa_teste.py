@@ -17,7 +17,7 @@ def lista(pref):
 os_=lista('teste/os/');ose=lista('teste/ose/');av=lista('teste/avisos/')
 cm=lista('teste/config/mecanicos');mecs=(cm[0]['data'] or {}).get('lista',[]) if cm else []
 fora=list(mecs);fica=[]  # 06/11: sai todos, inclusive os com login
-out={'aplicado':AP,'os':len(os_),'eventos':len(ose),'avisos':len(av),
+out={'detalhe':[{'path':r['path'],'num':(r['data'] or {}).get('num'),'eq':((r['data'] or {}).get('o') or {}).get('eq'),'por':((r['data'] or {}).get('o') or {}).get('porNome'),'ts':((r['data'] or {}).get('o') or {}).get('ts'),'oque':(((r['data'] or {}).get('o') or {}).get('aconteceu') or '')[:60]} for r in os_],'aplicado':AP,'os':len(os_),'eventos':len(ose),'avisos':len(av),
   'osNums':sorted((r['data'] or {}).get('num') or 0 for r in os_),
   'mecanicos_sai':[m.get('nome') for m in fora],'mecanicos_ficam':[m.get('nome') for m in fica]}
 print(json.dumps(out,ensure_ascii=False,indent=1))
